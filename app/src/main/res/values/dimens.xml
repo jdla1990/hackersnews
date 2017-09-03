@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <dimen name="spacing_horizontal">4sp</dimen>
+    <dimen name="spacing_vertical">10sp</dimen>
+    <dimen name="padding_activity">10sp</dimen>
+
+    <dimen name="card_height">90sp</dimen>
+    <dimen name="leyend_by_who">9sp</dimen>
+</resources>
