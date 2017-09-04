@@ -16,14 +16,11 @@ import android.widget.Toast;
 
 public class NewWebViewActivity extends AppCompatActivity {
 
-    public static final String SDK_LINK = "SDKLink";
-
     private WebView mWebView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(SDK_LINK, "HomeBankingMobileActivity Showed");
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mWebView = new WebView(this);
