@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Reigndesigntest</string>
+    <string name="label_activity_webview">WebView Hacker\'s</string>
 </resources>

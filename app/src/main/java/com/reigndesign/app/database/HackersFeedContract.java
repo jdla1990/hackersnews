@@ -106,9 +106,15 @@ public abstract class HackersFeedContract {
             String[] projection = {
                     HackersFeedContract.NewEntry._ID,
             };
-
-            String selection = NewEntry.COLUMN_NAME_ID_STORY + " = ? AND " + NewEntry.COLUMN_NAME_AUTHOR + " = ?";
-            String[] selectionArgs = {aNew.getStoryId(), aNew.getAuthor()};
+            String selection;
+            String[] selectionArgs = null;
+            if (aNew.getStoryId() == null) {
+                selection = NewEntry.COLUMN_NAME_DATE + " = ? AND " + NewEntry.COLUMN_NAME_AUTHOR + " = ?";
+                selectionArgs = new String[]{String.valueOf(aNew.getCreatedAt()), aNew.getAuthor()};
+            } else {
+                selection = NewEntry.COLUMN_NAME_ID_STORY + " = ? AND " + NewEntry.COLUMN_NAME_AUTHOR + " = ?";
+                selectionArgs = new String[]{aNew.getStoryId(), aNew.getAuthor()};
+            }
 
             cursor = db.query(
                     HackersFeedContract.NewEntry.TABLE_NAME,

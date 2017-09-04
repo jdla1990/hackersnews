@@ -1,6 +1,7 @@
 package com.reigndesign.app.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.CardView;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.reigndesign.app.NewWebViewActivity;
 import com.reigndesign.app.R;
 import com.reigndesign.app.database.HackersFeedContract;
 import com.reigndesign.app.database.HackersFeedDbHelper;
@@ -77,7 +79,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.contentStoryTextView.setText(mNew.getComment());
         holder.leyendByWho.setText(String.format("By %s, %s", mNew.getAuthor(),
                 DateHelper.format(mNew.getCreatedAt())));
-        holder.idDB = mNew.getIdDb();
+        holder.aNew = mNew;
 
         holder.cardView.setOnTouchListener(new SwipeDismissTouchListener(holder.cardView, mNew,
                 new SwipeDismissTouchListener.DismissCallbacks() {
@@ -92,6 +94,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                         removeNewFromDb(newDismissed);
                     }
                 }));
+
     }
 
     @Override
@@ -104,7 +107,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         TextView contentStoryTextView;
         TextView leyendByWho;
         CardView cardView;
-        int idDB;
+        New aNew;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -112,6 +115,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             this.titleStory = (TextView) itemView.findViewById(R.id.titleStoryTextView);
             this.contentStoryTextView = (TextView) itemView.findViewById(R.id.contentStoryTextView);
             this.leyendByWho = (TextView) itemView.findViewById(R.id.leyendByWho);
+            this.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, NewWebViewActivity.class);
+                    intent.putExtra("urlNew", aNew.getStoryUrl());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
